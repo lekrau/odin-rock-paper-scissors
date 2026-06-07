@@ -77,6 +77,15 @@ function getHumanChoice() {
 
 // console.log("getHumanChoice()", getHumanChoice());
 
+// Problem 3: Declare the players score variables
+// Problem is trivial, description in my own words etc. adds no value
+
+let humanScore = 0;
+let computerScore = 0;
+
+// console.log("humanScore", humanScore);
+// console.log("computerScore", computerScore);
+
 // Short Debug Log
 // What went wrong, if anything?
 // Which assumption was tested or confirmed?
