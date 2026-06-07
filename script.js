@@ -86,6 +86,95 @@ let computerScore = 0;
 // console.log("humanScore", humanScore);
 // console.log("computerScore", computerScore);
 
+// Problem 4: Step 5: Write the logic to play a single round
+
+// Problem Description in My Own Words
+// Write a function that takes the human and computer player choices as arguments, plays a single round,
+// increments the round winner’s score and logs a winner announcement.
+
+// Input: computer choice, human choice (strings)
+// Output: -
+
+// Assumptions
+// - The winner announcement shall be logged directly within the function, not returned
+// - The human choice parameter should be case-insensitive
+
+// Test Cases (2 - 4)
+// Normal case:
+// playRound("rock", "paper") -> undefined
+// playRound(getComputerChoice, getHumanChoice) -> undefined
+
+// Rough Plan / Subproblems
+// - Determine the winner based on the game rules and the player choices
+// - Update the score
+// - Log a winner announcement
+// Next Step (Smallest Subproblem): No need to add unnecessary complexity (helper functions)
+
+// Pseudocode for the Next Step
+// Convert the input args to lower case
+// Create a variable called roundResult of type string that starts with the value "tie".
+// Create a variable called winnerAnnouncement of type string that starts with the value "It's a tie!".
+// If arg computerChoice is "rock" and arg humanChoice is "paper"
+    // Set roundResult to "human win"
+    // Else if arg computerChoice is "rock" and arg humanChoice is "scissors"
+        // Set roundResult to "computer win"
+        // Else if arg computerChoice is "paper" and arg humanChoice is "rock"
+            // Set roundResult to "computer win"
+            // Else if arg computerChoice is "paper" and arg humanChoice is "scissors"
+                // Set roundResult to "human win"
+// If roundResult is "human win"
+    // Increment humanScore
+    // Set winnerAnnouncement to "You win! {humanChoice} beats {computerChoice}"
+    // Else if roundResult is "computerWin"
+        // Increment computerScore
+        // Set winnerAnnouncement to "You lose! {computerChoice} beats {humanChoice}"
+// Log the winnerAnnouncement
+
+// Implementation
+function playRound(computerChoice, humanChoice) {
+    // Deliberate decision to modify the args, as the value is retained and only cleaned up
+    computerChoice = computerChoice.toLowerCase();
+    humanChoice = humanChoice.toLowerCase();
+    let roundResult = "tie";
+    let winnerAnnouncement = "It's a tie!"
+    // Deliberate choice to introduce a helper function for better readability
+    roundResult = getRoundWinner(computerChoice, humanChoice);
+}
+
+function getRoundWinner(computerChoice, humanChoice) {
+    // Deliberate choice to use slightly different branching than in pseudo code
+    if (computerChoice === "rock") {
+        if (humanChoice === "paper") {
+            return "human win";
+        } else if (humanChoice === "scissors") {
+            return "computer win";
+        }
+    } else if (computerChoice === "paper") {
+        if (humanChoice === "scissors") {
+            return "human win";
+        } else if (humanChoice === "rock") {
+            return "computer win";
+        }
+    } else if (computerChoice === "scissors") {
+        if (humanChoice === "rock") {
+            return "human win";
+        } else if (humanChoice === "paper") {
+            return "computer win";
+        }
+    }
+    return "tie";
+}
+
+// console.log('getRoundWinner("rock", "paper")', getRoundWinner("rock", "paper"));
+// console.log('getRoundWinner("rock", "scissors")', getRoundWinner("rock", "scissors"));
+// console.log('getRoundWinner("rock", "rock")', getRoundWinner("rock", "rock"));
+// console.log('getRoundWinner("scissors", "paper")', getRoundWinner("scissors", "paper"));
+// console.log('getRoundWinner("scissors", "rock")', getRoundWinner("scissors", "rock"));
+// console.log('getRoundWinner("scissors", "scissors")', getRoundWinner("scissors", "scissors"));
+// console.log('getRoundWinner("paper", "scissors")', getRoundWinner("paper", "scissors"));
+// console.log('getRoundWinner("paper", "rock")', getRoundWinner("paper", "rock"));
+// console.log('getRoundWinner("paper", "paper")', getRoundWinner("paper", "paper"));
+
 // Short Debug Log
 // What went wrong, if anything?
 // Which assumption was tested or confirmed?
