@@ -136,10 +136,20 @@ function playRound(computerChoice, humanChoice) {
     computerChoice = computerChoice.toLowerCase();
     humanChoice = humanChoice.toLowerCase();
     let roundResult = "tie";
-    let winnerAnnouncement = "It's a tie!"
+    let winnerAnnouncement = `It's a tie! Both chose ${computerChoice}`
     // Deliberate choice to introduce a helper function for better readability
     roundResult = getRoundWinner(computerChoice, humanChoice);
+    if (roundResult === "human win") {
+        humanScore++;
+        winnerAnnouncement = `You win! ${humanChoice} beats ${computerChoice}`;
+    } else if (roundResult === "computer win") {
+        computerScore++;
+        winnerAnnouncement = `You lose! ${computerChoice} beats ${humanChoice}`;
+    }
+    console.log(winnerAnnouncement);
 }
+
+// playRound(getComputerChoice(), getHumanChoice());
 
 function getRoundWinner(computerChoice, humanChoice) {
     // Deliberate choice to use slightly different branching than in pseudo code
