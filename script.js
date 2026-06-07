@@ -46,6 +46,37 @@ function getComputerChoice(){
 
 // console.log("getComputerChoice()", getComputerChoice());
 
+// Problem 2: Write the logic to get the human choice
+
+// Problem Description in My Own Words
+// Write a function that takes the user choice and returns it.
+
+// Input: user input (string)
+// Output: users choice (string)
+
+// Assumptions
+// - The user will always enter a valid choice ("rock" || "paper" || "scissors")
+
+// Test Cases (2 - 4)
+// Normal case:
+// getHumanChoice() -> "rock" || "paper" || "scissors"
+
+// Rough Plan / Subproblems
+// - Prompt the user for his choice
+// - Return the users choice
+// Next Step (Smallest Subproblem): No need to add unnecessary complexity (helper functions)
+
+// Pseudocode for the Next Step
+// Prompt the user for his choice
+// Immediately return it
+
+// Implementation
+function getHumanChoice() {
+    return prompt("Make your choice!", "rock");
+}
+
+// console.log("getHumanChoice()", getHumanChoice());
+
 // Short Debug Log
 // What went wrong, if anything?
 // Which assumption was tested or confirmed?
