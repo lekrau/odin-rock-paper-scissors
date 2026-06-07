@@ -80,13 +80,12 @@ function getHumanChoice() {
 // Problem 3: Declare the players score variables
 // Problem is trivial, description in my own words etc. adds no value
 
-let humanScore = 0;
-let computerScore = 0;
+// Edit: Moved to playGame() function
 
 // console.log("humanScore", humanScore);
 // console.log("computerScore", computerScore);
 
-// Problem 4: Step 5: Write the logic to play a single round
+// Problem 4: Write the logic to play a single round
 
 // Problem Description in My Own Words
 // Write a function that takes the human and computer player choices as arguments, plays a single round,
@@ -140,16 +139,16 @@ function playRound(computerChoice, humanChoice) {
     // Deliberate choice to introduce a helper function for better readability
     roundResult = getRoundWinner(computerChoice, humanChoice);
     if (roundResult === "human win") {
-        humanScore++;
+        // humanScore++;
         winnerAnnouncement = `You win! ${humanChoice} beats ${computerChoice}`;
     } else if (roundResult === "computer win") {
-        computerScore++;
+        // computerScore++;
         winnerAnnouncement = `You lose! ${computerChoice} beats ${humanChoice}`;
     }
     console.log(winnerAnnouncement);
+    // Edit: New "feature" for the last step of this assignment
+    return roundResult;
 }
-
-// playRound(getComputerChoice(), getHumanChoice());
 
 function getRoundWinner(computerChoice, humanChoice) {
     // Deliberate choice to use slightly different branching than in pseudo code
@@ -184,6 +183,62 @@ function getRoundWinner(computerChoice, humanChoice) {
 // console.log('getRoundWinner("paper", "scissors")', getRoundWinner("paper", "scissors"));
 // console.log('getRoundWinner("paper", "rock")', getRoundWinner("paper", "rock"));
 // console.log('getRoundWinner("paper", "paper")', getRoundWinner("paper", "paper"));
+
+// Problem 5: Write the logic to play the entire game
+
+// Problem Description in My Own Words
+// Write a function named playGame that calls playRound to play 5 rounds, keeps track of the scores and declares a winner at the end.
+
+// Input: -
+// Output: -
+
+// Assumptions
+// - Nothing comes to mind
+
+// Test Cases (2 - 4)
+// Normal case:
+// playGame() -> undefined
+
+// Rough Plan / Subproblems
+// - Initialize score variables
+// - Play a round
+// - Repeat five times
+// Next Step (Smallest Subproblem): No need to add unnecessary complexity (helper functions)
+
+// Pseudocode for the Next Step
+// Create a variable called humanScore of type number that starts with the value 0.
+// Create a variable called computerScore of type number that starts with the value 0.
+// Create a variable called round of type number that starts with the value 1.
+// As long as round is <= 5
+    // Log the round number    
+    // Play a round
+    // Increment the round variable
+// Log the overall score/winner
+
+// Implementation
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    for (let round = 1; round <= 5; round++) {
+        console.log(`Round ${round}, get ready!`)
+        let roundResult = playRound(getComputerChoice(), getHumanChoice());
+        if (roundResult === "human win") {
+            humanScore++;
+        } else if (roundResult === "computer win"){
+            computerScore++;
+        }
+    }
+    if (humanScore > computerScore) {
+        console.log("Congrats, you won!")
+    } else if (humanScore < computerScore) {
+        console.log("You lost. Try again!")
+    } else {
+        console.log("It's a tie. Play again!")
+    }
+    console.log(`Final score: Human: ${humanScore}, Computer: ${computerScore}`)
+}
+
+playGame();
 
 // Short Debug Log
 // What went wrong, if anything?
