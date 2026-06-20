@@ -1,7 +1,6 @@
-// 1: Write a function to get a random computer choice
-
+// Write a function to get a random computer choice
 // Assumptions
-// - The computer choses randomly
+// - The computer chooses randomly
 // - Each choice has the same probability (within reason)
 
 "use strict";
@@ -17,29 +16,9 @@ function getComputerChoice(){
     }
 }
 
-// console.log("getComputerChoice()", getComputerChoice());
-
-// 2: Write a function to get the human choice
-
+// Write a function to play a single round
 // Assumptions
-// - The user will always enter a valid choice ("rock" || "paper" || "scissors")
-
-function getHumanChoice() {
-    return prompt("Make your choice!", "rock");
-}
-
-// console.log("getHumanChoice()", getHumanChoice());
-
-// 3: Declare the players score variables
-// Edit: Moved to playGame() function
-
-// console.log("humanScore", humanScore);
-// console.log("computerScore", computerScore);
-
-// 4: Write a function to play a single round
-
-// Assumptions
-// - The winner announcement shall be logged directly within the function, not returned
+// - The winner announcement shall be returned (not logged directly within the function)
 // - The human choice parameter should be case-insensitive
 
 function playRound(computerChoice, humanChoice) {
@@ -60,7 +39,6 @@ function playRound(computerChoice, humanChoice) {
 }
 
 function getRoundWinner(computerChoice, humanChoice) {
-    // Deliberate choice to use slightly different branching than in pseudo code
     if (computerChoice === "rock") {
         if (humanChoice === "paper") {
             return "human win";
@@ -83,17 +61,7 @@ function getRoundWinner(computerChoice, humanChoice) {
     return "tie";
 }
 
-// console.log('getRoundWinner("rock", "paper")', getRoundWinner("rock", "paper"));
-// console.log('getRoundWinner("rock", "scissors")', getRoundWinner("rock", "scissors"));
-// console.log('getRoundWinner("rock", "rock")', getRoundWinner("rock", "rock"));
-// console.log('getRoundWinner("scissors", "paper")', getRoundWinner("scissors", "paper"));
-// console.log('getRoundWinner("scissors", "rock")', getRoundWinner("scissors", "rock"));
-// console.log('getRoundWinner("scissors", "scissors")', getRoundWinner("scissors", "scissors"));
-// console.log('getRoundWinner("paper", "scissors")', getRoundWinner("paper", "scissors"));
-// console.log('getRoundWinner("paper", "rock")', getRoundWinner("paper", "rock"));
-// console.log('getRoundWinner("paper", "paper")', getRoundWinner("paper", "paper"));
-
-// UI (revisiting the project)
+// UI - revisiting the project
 // Add an event listener to the buttons that calls the playRound function with the correct playerSelection every time a button is clicked
 const buttonClick = e => {
     const target = e.target;
@@ -105,7 +73,7 @@ const buttonClick = e => {
     } else if (target.matches("#scissors")) {
         result = playRound(getComputerChoice(), "scissors");
     }
-    const humanLabel = document.querySelector("#humanlabel");
+    const humanLabel = document.querySelector("#human-label");
     if (humanLabel === null) {
         initializeScore();
     }
@@ -143,12 +111,12 @@ const refreshScore = roundResult => {
     switch (roundResult) {
         case "human win":
             humanScore++;
-            const humanValue = document.querySelector("#humanscore");
+            const humanValue = document.querySelector("#human-score");
             humanValue.textContent = humanScore;
             break;
         case "computer win":
             computerScore++;
-            const computerValue = document.querySelector("#computerscore");
+            const computerValue = document.querySelector("#computer-score");
             computerValue.textContent = computerScore;
             break;
         case "tie":
@@ -170,19 +138,19 @@ const initializeScore = () => {
     const computerLabel = document.createElement("p");
     humanLabel.textContent = "Human: ";
     computerLabel.textContent = "Computer: ";
-    humanLabel.id = "humanlabel";
-    computerLabel.id = "computerLabel";
+    humanLabel.id = "human-label";
+    computerLabel.id = "computer-label";
     const humanValue = document.createElement("span");
     const computerValue = document.createElement("span");
-    humanValue.id = "humanscore";
-    computerValue.id = "computerscore";
+    humanValue.id = "human-score";
+    computerValue.id = "computer-score";
     humanValue.textContent = 0;
     computerValue.textContent = 0;
     humanLabel.appendChild(humanValue);
     computerLabel.appendChild(computerValue);
     score.appendChild(humanLabel);
     score.appendChild(computerLabel);
-}
+};
 
 const announceOverallWinner = () => {
     const score = document.querySelector("#score");
@@ -195,7 +163,7 @@ const announceOverallWinner = () => {
         winnerLabel.textContent = "Game over. Computer win!";
     }
     score.appendChild(winnerLabel);
-}
+};
 
 const resetGame = () => {
     const score = document.querySelectorAll("#score > *");
@@ -206,7 +174,7 @@ const resetGame = () => {
     roundCount = 0;
     humanScore = 0;
     computerScore = 0;
-}
+};
 
 
 // Short Debug Log
