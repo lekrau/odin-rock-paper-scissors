@@ -93,6 +93,27 @@ function getRoundWinner(computerChoice, humanChoice) {
 // console.log('getRoundWinner("paper", "rock")', getRoundWinner("paper", "rock"));
 // console.log('getRoundWinner("paper", "paper")', getRoundWinner("paper", "paper"));
 
+// UI (revisiting the project)
+// Add an event listener to the buttons that calls the playRound function with the correct playerSelection every time a button is clicked
+const buttonClick = e => {
+    const target = e.target;
+    if (target.matches("#rock")) {
+         playRound(getComputerChoice(), "rock")
+    } else if (target.matches("#paper")) {
+        playRound(getComputerChoice(), "paper");
+    } else if (target.matches("#scissors")) {
+        playRound(getComputerChoice(), "scissors");
+    }
+};
+
+const buttons = document.querySelectorAll("button");
+for (let i = 0; i < buttons.length; i++) {
+    const button = buttons[i];
+    button.addEventListener("click", buttonClick);
+}
+
+
+
 // Short Debug Log
 // What went wrong, if anything?
 // -
