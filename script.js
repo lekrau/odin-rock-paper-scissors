@@ -93,37 +93,8 @@ function getRoundWinner(computerChoice, humanChoice) {
 // console.log('getRoundWinner("paper", "rock")', getRoundWinner("paper", "rock"));
 // console.log('getRoundWinner("paper", "paper")', getRoundWinner("paper", "paper"));
 
-// 5: Write a function to play the entire game (5 rounds)
-
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    for (let round = 1; round <= 5; round++) {
-        console.log(`Round ${round}, get ready!`);
-        const roundResult = playRound(getComputerChoice(), getHumanChoice());
-        if (roundResult === "human win") {
-            humanScore++;
-        } else if (roundResult === "computer win"){
-            computerScore++;
-        }
-    }
-    if (humanScore > computerScore) {
-        console.log("Congrats, you won!");
-    } else if (humanScore < computerScore) {
-        console.log("You lost. Try again!");
-    } else {
-        console.log("It's a tie. Play again!");
-    }
-    console.log(`Final score: Human: ${humanScore}, Computer: ${computerScore}`);
-}
-
-playGame();
-
 // Short Debug Log
 // What went wrong, if anything?
-// - Only really small details like confusing ´ with `
+// -
 // What did I change or learn?
-// - Seems like the extra work into problem solving payed of, as this project went really smooth within ca. 90 min
-// - Helper functions also can be created by finished code to improve readability
-// - Comments must stay in sync with the code—otherwise, they become more of a liability than no comments at all
-// - Use const vor variables who are assigned only once
+// - 
