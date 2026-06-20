@@ -55,7 +55,7 @@ function playRound(computerChoice, humanChoice) {
     } else if (roundResult === "computer win") {
         winnerAnnouncement = `You lose! ${computerChoice} beats ${humanChoice}`;
     }
-    console.log(winnerAnnouncement);
+    announceWinner(winnerAnnouncement);
     return roundResult;
 }
 
@@ -110,8 +110,16 @@ const buttons = document.querySelectorAll("button");
 for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];
     button.addEventListener("click", buttonClick);
-}
+};
 
+const announceWinner = winnerAnnouncement => {
+    console.log("test");
+    
+    const results = document.querySelector("#results");
+    const para = document.createElement("p");
+    para.textContent = winnerAnnouncement;
+    results.appendChild(para);
+};
 
 
 // Short Debug Log
