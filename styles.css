@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1rem;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section, h1 {
+    margin: 1rem;
+}
+
+section {
+    width: 290px;
+}
