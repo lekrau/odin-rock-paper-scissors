@@ -97,12 +97,28 @@ function getRoundWinner(computerChoice, humanChoice) {
 // Add an event listener to the buttons that calls the playRound function with the correct playerSelection every time a button is clicked
 const buttonClick = e => {
     const target = e.target;
+    let result = "error";
     if (target.matches("#rock")) {
-         playRound(getComputerChoice(), "rock")
+        result = playRound(getComputerChoice(), "rock");
     } else if (target.matches("#paper")) {
-        playRound(getComputerChoice(), "paper");
+        result = playRound(getComputerChoice(), "paper");
     } else if (target.matches("#scissors")) {
-        playRound(getComputerChoice(), "scissors");
+        result = playRound(getComputerChoice(), "scissors");
+    }
+    const humanLabel = document.querySelector("#humanlabel");
+    if (humanLabel === null) {
+        initializeScore();
+    }
+    refreshScore(result);
+    roundCount++;
+    if (humanScore >= 5 || computerScore >= 5) {
+        announceOverallWinner();
+        const reset = document.createElement("button");
+        reset.textContent = "New game";
+        const score = document.querySelector("#score");
+        score.appendChild(reset);
+        reset.addEventListener("click", resetGame);
+        buttons.forEach(button => button.disabled = true);
     }
 };
 
@@ -113,13 +129,84 @@ for (let i = 0; i < buttons.length; i++) {
 };
 
 const announceWinner = winnerAnnouncement => {
-    console.log("test");
-    
     const results = document.querySelector("#results");
     const para = document.createElement("p");
-    para.textContent = winnerAnnouncement;
+    para.textContent = `Round ${roundCount + 1}: ${winnerAnnouncement}`;
     results.appendChild(para);
 };
+
+let humanScore = 0;
+let computerScore = 0;
+let roundCount = 0;
+
+const refreshScore = roundResult => {
+    switch (roundResult) {
+        case "human win":
+            humanScore++;
+            const humanValue = document.querySelector("#humanscore");
+            humanValue.textContent = humanScore;
+            break;
+        case "computer win":
+            computerScore++;
+            const computerValue = document.querySelector("#computerscore");
+            computerValue.textContent = computerScore;
+            break;
+        case "tie":
+            // Do nothing
+            break;
+        case "error":
+            // Redundant to default
+            console.log("Error: Round result could not be retrieved");
+            break;
+        default:
+            console.log("Error: Round result could not be retrieved");
+            break;
+    }
+};
+
+const initializeScore = () => {
+    const score = document.querySelector("#score");
+    const humanLabel = document.createElement("p");
+    const computerLabel = document.createElement("p");
+    humanLabel.textContent = "Human: ";
+    computerLabel.textContent = "Computer: ";
+    humanLabel.id = "humanlabel";
+    computerLabel.id = "computerLabel";
+    const humanValue = document.createElement("span");
+    const computerValue = document.createElement("span");
+    humanValue.id = "humanscore";
+    computerValue.id = "computerscore";
+    humanValue.textContent = 0;
+    computerValue.textContent = 0;
+    humanLabel.appendChild(humanValue);
+    computerLabel.appendChild(computerValue);
+    score.appendChild(humanLabel);
+    score.appendChild(computerLabel);
+}
+
+const announceOverallWinner = () => {
+    const score = document.querySelector("#score");
+    const winnerLabel = document.createElement("p");
+    if (humanScore === computerScore) {
+        winnerLabel.textContent = "Game over. It's a tie!";
+    } else if (humanScore > computerScore) {
+        winnerLabel.textContent = "Game over. Human win!";
+    } else if (humanScore < computerScore) {
+        winnerLabel.textContent = "Game over. Computer win!";
+    }
+    score.appendChild(winnerLabel);
+}
+
+const resetGame = () => {
+    const score = document.querySelectorAll("#score > *");
+    score.forEach(node => node.remove());
+    const results = document.querySelectorAll("#results > *");
+    results.forEach(node => node.remove());
+    buttons.forEach(button => button.disabled = false);
+    roundCount = 0;
+    humanScore = 0;
+    computerScore = 0;
+}
 
 
 // Short Debug Log
